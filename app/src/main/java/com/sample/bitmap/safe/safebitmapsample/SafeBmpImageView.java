@@ -40,17 +40,14 @@ public class SafeBmpImageView extends ImageView {
 
     @Override
     public void setImageBitmap(Bitmap bm) {
-        Log.d("hogehoge", "setImageBitmap");
         mBitmap = bm;
         super.setImageBitmap(bm);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        Log.d("hogehoge","onDraw");
 
         if(mBitmap != null && mBitmap.isRecycled()){
-            Log.d("hogehoge","retry");
             //Bitmapが破棄されていた場合、ImageViewの初期化を行い、ImageLoaderで再取得を行う
             this.setImageBitmap(null);
             ImageLoader loader = ImageLoader.getInstance();

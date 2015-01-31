@@ -79,7 +79,6 @@ public class LruMemoryCacheWithRecycle implements MemoryCache {
             size += sizeOf(key, value);
             Bitmap previous = map.put(key, value);
             if (previous != null) {
-                Log.d(TAG,"put recycle");
                 previous.recycle();
                 size -= sizeOf(key, previous);
             }
@@ -95,7 +94,6 @@ public class LruMemoryCacheWithRecycle implements MemoryCache {
      * @param maxSize the maximum size of the cache before returning. May be -1 to evict even 0-sized elements.
      */
     private void trimToSize(int maxSize) {
-        Log.d(TAG,"trimToSize ");
         while (true) {
             String key;
             Bitmap value;
@@ -116,7 +114,6 @@ public class LruMemoryCacheWithRecycle implements MemoryCache {
                 value = toEvict.getValue();
 
                 if(value != null){
-                    Log.d(TAG,"trimToSize recycle");
                     value.recycle();
                 }
 
@@ -129,7 +126,6 @@ public class LruMemoryCacheWithRecycle implements MemoryCache {
     /** Removes the entry for {@code key} if it exists. */
     @Override
     public final Bitmap remove(String key) {
-        Log.d(TAG,"remove ");
         if (key == null) {
             throw new NullPointerException("key == null");
         }
@@ -138,7 +134,6 @@ public class LruMemoryCacheWithRecycle implements MemoryCache {
             Bitmap previous = map.remove(key);
             if (previous != null) {
                 size -= sizeOf(key, previous);
-                Log.d(TAG,"remove recycle");
                 previous.recycle();
             }
             return previous;
@@ -154,7 +149,6 @@ public class LruMemoryCacheWithRecycle implements MemoryCache {
 
     @Override
     public void clear() {
-        Log.d(TAG,"clear ");
         trimToSize(-1); // -1 will evict 0-sized elements
     }
 
