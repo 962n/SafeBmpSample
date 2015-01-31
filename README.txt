@@ -30,8 +30,8 @@ SafeBmpImageView.java
 ■自分のアプリに組み込みたい場合にやること
 　①LruCacheMemoryWithRecycle.javaをImageLoaderConfigurationでImageLoaderで使用する
    メモリキャッシュに設定します。
-　②ImageLoaderを使って画像を設定しているすべてのImageViewに対してこのクラスを使うように修正します。
-   ImageLoaderで画像を取得する場合は必ずその前にsetRetryBmpURL()を呼び出し、再取得するための
+　②ImageLoaderを使って画像を設定しているすべてのImageViewに対してSafeBmpImageViewを使うように修正します。
+   ImageLoaderで画像を取得する場合は必ずその前にSafeBmpImageView#setRetryBmpURL()を呼び出し、再取得するための
    画像URLを設定するようにしてください。(以下のコード参照)
    —————
    SafeBmpImageView image = new SafeBmpImageView(context);
